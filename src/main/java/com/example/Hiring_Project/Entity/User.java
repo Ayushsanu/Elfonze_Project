@@ -12,7 +12,6 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "users")
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
