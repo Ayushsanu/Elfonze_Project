@@ -1,4 +1,4 @@
-package com.example.Hiring_Project.Security;
+package com.example.Hiring_Project.Authentication_Module.Security;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
