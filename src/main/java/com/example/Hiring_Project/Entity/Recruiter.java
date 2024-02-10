@@ -5,24 +5,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import lombok.*;
-import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.Id;
 
 @Entity
-@Table(name = "clients")
+@Table(name = "recruiters")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Client {
+public class Recruiter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
     private String email;
-
     private String jobDescriptionURL;
-
 }

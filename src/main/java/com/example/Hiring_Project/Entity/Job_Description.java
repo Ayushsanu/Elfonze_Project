@@ -18,14 +18,9 @@ public class Job_Description {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
-
     private String description;
-
     private String skills;
-
     private String experience;
-
     private String education;
 }
