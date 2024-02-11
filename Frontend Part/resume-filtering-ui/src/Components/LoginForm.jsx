@@ -10,8 +10,12 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 
 const LoginForm = () => {
+  useEffect(() => {
+    document.title = "Login";
+  }, []);
   return (
     <Flex justifyContent="center" alignItems="center" mt="20px">
       <Card p="24px" flexGrow={1} maxW="900px" border="1px solid black">
