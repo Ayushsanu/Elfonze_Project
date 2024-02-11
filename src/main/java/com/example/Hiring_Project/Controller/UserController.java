@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/add")
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/user")
+    @PostMapping("/add")
     public ResponseEntity<UserResponseDTO> addUser(User user){
         try {
             UserResponseDTO userDTO=userService.addUser(user);

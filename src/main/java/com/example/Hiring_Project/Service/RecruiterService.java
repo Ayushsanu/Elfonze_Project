@@ -14,7 +14,7 @@ import java.util.List;
 public class RecruiterService {
     @Autowired
     private RecruiterRepository recruiterRepository;
-    public RecruiterResponseDTO addRecruiter(Recruiter recruiter) {
+    public RecruiterResponseDTO addRecruiter(Recruiter recruiter) throws RuntimeException{
         if (recruiter.getEmail()==null || recruiter.getJobDescriptionURL()==null || recruiter.getName()==null)
             throw new RuntimeException("Please enter valid details");
         recruiterRepository.save(recruiter);
@@ -22,7 +22,7 @@ public class RecruiterService {
         return recruiterDTO;
     }
 
-    public List<Recruiter> getAllRecruiters() {
+    public List<Recruiter> getAllRecruiters() throws RuntimeException{
         List<Recruiter> allRecruiters=recruiterRepository.findAll();
         if (allRecruiters.size()==0)
             throw new RuntimeException("No recruiter is present");

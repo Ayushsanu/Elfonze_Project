@@ -11,14 +11,19 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/resume")
 public class ResumeController {
     @Autowired
     ResumeService resumeService;
-    @PostMapping("/add_resumes")
-    public ResponseEntity<Resume> uploadResume(@RequestBody Resume file) {
-        Resume uploadedResume = resumeService.uploadResume(file);
-        return ResponseEntity.ok(uploadedResume);
+    @PostMapping("/add")
+    public ResponseEntity<String> uploadResume(@RequestBody Resume file) {
+        try {
+            String success = resumeService.uploadResume(file);
+            return new ResponseEntity<>(success,HttpStatus.ACCEPTED);
+        }
+        catch (Exception  e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/get_resumes")
@@ -28,7 +33,7 @@ public class ResumeController {
             return new ResponseEntity<>(resumes, HttpStatus.OK);
         }
         catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
 }

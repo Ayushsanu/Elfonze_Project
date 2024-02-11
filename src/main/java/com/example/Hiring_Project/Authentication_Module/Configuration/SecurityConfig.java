@@ -8,12 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -36,11 +34,14 @@ public class SecurityConfig {
         http.csrf(csrf->csrf.disable())
                 .cors(cors->cors.disable())
                 .authorizeHttpRequests(auth->auth.requestMatchers("/auth/login").permitAll()
-                        .requestMatchers("/super-admin/**").hasRole("SUPER_ADMIN")
-                        .requestMatchers("/admin/**").hasAnyRole("SUPER_ADMIN","ADMIN")
-                        .requestMatchers("/recruiter/**").hasAnyRole("SUPER_ADMIN","ADMIN","RECRUITER")
-                        .requestMatchers("/")
-                        .permitAll()
+                        .requestMatchers("/**").hasRole("SUPER_ADMIN")
+                        .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/user/**").hasAnyRole("SUPER_ADMIN","ADMIN")
+                        .requestMatchers("/job-description/**").hasAnyRole("SUPER_ADMIN","ADMIN")
+                        .requestMatchers("/job-description/add").hasAnyRole("RECRUITER")
+                        .requestMatchers("/recruiter/**").hasAnyRole("SUPER_ADMIN","ADMIN")
+                        .requestMatchers("/resume/**").hasAnyRole("SUPER_ADMIN","ADMIN")
+                        .requestMatchers("/resume.add").hasAnyRole("ADMIN","STUDENT")
                         .anyRequest()
                         .authenticated())
                 .exceptionHandling(ex->ex.authenticationEntryPoint(point))

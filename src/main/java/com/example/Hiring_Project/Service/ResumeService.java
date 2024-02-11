@@ -12,11 +12,14 @@ import java.util.List;
 public class ResumeService {
     @Autowired
     private ResumeRepository resumeRepository;
-    public Resume uploadResume(Resume file) {
-        return resumeRepository.save(file);
+    public String uploadResume(Resume file) throws RuntimeException{
+        if (file.getFileUrl()==null || file.getUser().getUsername()==null)
+            throw new RuntimeException("Please enter required details");
+        resumeRepository.save(file);
+        return "Resume added successfully";
     }
 
-    public List<Resume> getAllResumes() {
+    public List<Resume> getAllResumes() throws RuntimeException{
         List<Resume> resumes=resumeRepository.findAll();
         if (resumes.size()==0)
             throw new RuntimeException("No resume found");
